@@ -3,15 +3,23 @@
     require_once __DIR__. "/autoload/autoload.php";
 
     $id = intval(getInput('id'));
-    
+    $_SESSION['product_id'] = $id;
     $products = $db->fetchAll('products');
     $detailProduct = $db->fetchID('products', $id);
     // $otherProducts = $db->fetchAll('categories');
     $id2 = $detailProduct['categoryID'];
     $sql = " SELECT * FROM `products` WHERE `categoryID` = $id2";
+    $sql2 = "SELECT comment.content, user.first_name, user.last_name from comment,user where comment.productID = $id and user.id = comment.userID";
+    $listComment = $db->fetchsql($sql2);
     $productsMore = $db->fetchsql($sql);
+ 
+    // var_dump($productsMore);
 ?>
-<?php  require_once __DIR__. "/layouts/header.php";?>
+<?php  require_once __DIR__. "/layouts/header.php";
+?>
+<style>
+    <?php include "styles.css"; ?>
+</style>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="public/frontend/img/breadcrumb.jpg">
     <div class="container">
@@ -93,6 +101,36 @@
     </div>
 </section>
 <!-- Product Details Section End -->
+<!-- Comment -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Comment</h2>
+                </div>
+            </div>
+        </div>
+        <div class="comment-group">
+            <form id="comment-form" method="post" >
+            <div class="input-group mb-3">
+                <input type="text" id="input-content" name="content" class="form-control" placeholder="Give our your feedback here " aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-danger" name="comment"  type="submit" id="button-addon2">Button</button>
+            </div>
+            </form>
+            <div class="comment mt-5">
+                <?php 
+                    foreach($listComment as $item) :?>
+                        <h5 class="mt-3 mb-3"><?php echo($item['first_name'].' '. $item['last_name'])?></h5>
+                        <div class="alert alert-dark mt-3 mb-3" role="alert">
+                            <?php echo $item['content']?>
+                        </div>
+                <?php endforeach?>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Comment -->
 <!-- Related Product Section Begin -->
 <section class="related-product">
     <div class="container">

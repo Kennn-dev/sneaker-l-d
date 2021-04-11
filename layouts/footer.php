@@ -100,6 +100,23 @@
                 })
             })
 
+           $("#button-addon2").on('click', function(){
+               var content = $('#input-content').val();
+               if(content != ""){
+                   $.ajax({
+                       url : "addComment.php",
+                       type : "post",
+                       data  :{
+                           content : content
+                       },
+                       cache : false,
+                       success : function(res){
+                           //
+                       }
+                   })
+               }
+           })
+
         </script>
     </body>
 </html>

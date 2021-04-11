@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2021 at 05:16 PM
+-- Generation Time: Apr 11, 2021 at 10:41 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -55,6 +55,28 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `productID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `content` varchar(225) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`productID`, `userID`, `content`) VALUES
+(1, 1, 'Con meo cho de'),
+(1, 1, 'Con meo cho de'),
+(1, 1, 'ok chua'),
+(1, 4, 'con meo` nhin kho chiu zay');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -89,6 +111,16 @@ CREATE TABLE `user` (
   `phone` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
   `password` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `password`) VALUES
+(1, 'Ken', 'Dep trai', 'nhatong2015@gmail.com', 'a123', '123', 123),
+(2, 'fake', 'name', 'fake@email.com', '123', '123', 123),
+(3, 'fake', 'name', 'fake@email.com', '123', '123', 123),
+(4, 'Ken', 'Thu hai', 'fake2@email', '123', '123', 123);
 
 --
 -- Indexes for dumped tables
@@ -144,7 +176,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
